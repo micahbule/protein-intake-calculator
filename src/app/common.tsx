@@ -11,6 +11,7 @@ export type ReducerInitialState = {
 export enum ActionTypes {
   UPDATE_DAILY_PROTEIN_NEED = "UPDATE_DAILY_PROTEIN_NEED",
   UPDATE_CURRENT_PROTEIN_INTAKE = "UPDATE_CURRENT_PROTEIN_INTAKE",
+  UPDATE_PROTEIN_BRAND = "UPDATE_PROTEIN_BRAND",
 }
 
 type FormContextType = {
@@ -29,5 +30,7 @@ export function getActionType(key: keyof ReducerInitialState) {
       return ActionTypes.UPDATE_CURRENT_PROTEIN_INTAKE;
     case "dailyProteinNeed":
       return ActionTypes.UPDATE_DAILY_PROTEIN_NEED;
+    case "proteinBrand":
+      return ActionTypes.UPDATE_PROTEIN_BRAND;
   }
 }
