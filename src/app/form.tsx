@@ -16,7 +16,6 @@ const initialState: ReducerInitialState = {
   currentProteinIntake: 0,
   proteinBrand: 0,
   proteinVariant: 0,
-  scoopsNeeded: 0,
 };
 
 function reducer(
@@ -42,6 +41,12 @@ function reducer(
         proteinBrand: action.value,
       };
     }
+    case ActionTypes.UPDATE_PROTEIN_VARIANT: {
+      return {
+        ...state,
+        proteinVariant: action.value,
+      };
+    }
     default:
       return state;
   }
@@ -58,6 +63,19 @@ export default function Form({ brands, variants }: FormProps) {
     () => variants.filter((variant) => variant.brand_id === state.proteinBrand),
     [variants, state.proteinBrand]
   );
+  const scoopsNeeded = useMemo(() => {
+    const deficit = state.dailyProteinNeed - state.currentProteinIntake;
+    const variant = filteredVariants.find(
+      (variant) => variant.value === state.proteinVariant
+    );
+
+    return deficit / variant.grams_per_serving;
+  }, [
+    state.currentProteinIntake,
+    state.dailyProteinNeed,
+    state.proteinVariant,
+    filteredVariants,
+  ]);
 
   return (
     <div className="container md:px-12 lg:px-12 xl:px-12 2xl:px-96">
@@ -88,7 +106,7 @@ export default function Form({ brands, variants }: FormProps) {
             <VariantSelect variants={filteredVariants} />
           </div>
           <div className="col-span-2 pt-4 place-self-center">
-            <span>Scoops Needed</span>
+            <span>Scoops Needed:</span>&nbsp;{Number(scoopsNeeded).toFixed(2)}
           </div>
         </div>
       </FormContext.Provider>

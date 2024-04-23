@@ -5,13 +5,13 @@ export type ReducerInitialState = {
   currentProteinIntake: number;
   proteinBrand: number;
   proteinVariant: number;
-  scoopsNeeded: number;
 };
 
 export enum ActionTypes {
   UPDATE_DAILY_PROTEIN_NEED = "UPDATE_DAILY_PROTEIN_NEED",
   UPDATE_CURRENT_PROTEIN_INTAKE = "UPDATE_CURRENT_PROTEIN_INTAKE",
   UPDATE_PROTEIN_BRAND = "UPDATE_PROTEIN_BRAND",
+  UPDATE_PROTEIN_VARIANT = "UPDATE_PROTEIN_VARIANT",
 }
 
 type FormContextType = {
@@ -32,5 +32,7 @@ export function getActionType(key: keyof ReducerInitialState) {
       return ActionTypes.UPDATE_DAILY_PROTEIN_NEED;
     case "proteinBrand":
       return ActionTypes.UPDATE_PROTEIN_BRAND;
+    case "proteinVariant":
+      return ActionTypes.UPDATE_PROTEIN_VARIANT;
   }
 }

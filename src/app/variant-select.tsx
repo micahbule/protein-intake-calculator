@@ -13,7 +13,7 @@ export default function VariantSelect({ variants }: { variants: any[] }) {
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       dispatch({
         type: actionType,
-        value: e.target.value,
+        value: Number(e.target.value),
       });
     },
     [dispatch, actionType]
@@ -25,9 +25,9 @@ export default function VariantSelect({ variants }: { variants: any[] }) {
       value={value}
       onChange={handleChange}
     >
-      {variants.map((brand: any) => (
-        <option key={brand._id} value={brand.value}>
-          {brand.label}
+      {variants.map((variant: any) => (
+        <option key={variant._id} value={variant.value}>
+          {variant.label}
         </option>
       ))}
     </select>
