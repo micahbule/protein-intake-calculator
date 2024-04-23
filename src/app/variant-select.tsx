@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useMemo, useCallback } from "react";
+import { useContext, useMemo, useCallback, useEffect } from "react";
 import { FormContext, getActionType } from "./common";
 
 export default function VariantSelect({ variants }: { variants: any[] }) {
@@ -8,6 +8,13 @@ export default function VariantSelect({ variants }: { variants: any[] }) {
   const inputKey = "proteinVariant";
   const actionType = useMemo(() => getActionType(inputKey), [inputKey]);
   const value = useMemo(() => state[inputKey], [state, inputKey]);
+
+  useEffect(() => {
+    dispatch({
+      type: actionType,
+      value: variants[0].value,
+    });
+  }, [state.proteinBrand, variants, dispatch, actionType]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {

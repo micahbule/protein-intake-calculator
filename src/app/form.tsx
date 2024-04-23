@@ -69,6 +69,8 @@ export default function Form({ brands, variants }: FormProps) {
       (variant) => variant.value === state.proteinVariant
     );
 
+    if (!variant) return 0;
+
     return deficit / variant.grams_per_serving;
   }, [
     state.currentProteinIntake,
